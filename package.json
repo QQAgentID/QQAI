@@ -1,0 +1,14 @@
+{
+  "name": "qqai-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QQAI smart contracts — QQ Agentic ID NFT and the $QQAI token on BNB Chain.",
+  "license": "MIT",
+  "scripts": {
+    "compile": "node contracts/compile.js"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "solc": "0.8.28"
+  }
+}
