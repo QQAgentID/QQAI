@@ -2,7 +2,7 @@
   "name": "qqai-contracts",
   "version": "1.0.0",
   "private": true,
-  "description": "QQAI smart contracts — QQ Agentic ID NFT and the $QQAI token on BNB Chain.",
+  "description": "QQAI smart contracts — the $QQAI token and its Agent ID-gated sale on BNB Chain.",
   "license": "MIT",
   "scripts": {
     "compile": "node contracts/compile.js"

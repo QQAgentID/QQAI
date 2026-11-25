@@ -4,7 +4,7 @@ const solc = require('solc');
 
 const HERE = __dirname;
 const LIBBASE = path.join(HERE, '..', 'node_modules', '@openzeppelin', 'contracts');
-const FILES = ['External.sol', 'QQAITierData.sol', 'QQAINFT.sol', 'QQAIToken.sol', 'QQAIClaim.sol', 'QQAIMarket.sol', 'QQAIPoolManager.sol'];
+const FILES = ['External.sol', 'QQAIToken.sol', 'QQAIMint.sol', 'QQAIVesting.sol', 'QQAIDeployer.sol'];
 
 const sources = {};
 for (const f of FILES) sources[f] = { content: fs.readFileSync(path.join(HERE, f), 'utf8') };

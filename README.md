@@ -1,58 +1,46 @@
 # QQAI
 
-**QQ Agentic ID (QQAID)** — an Agent ID-gated NFT collection on BNB Chain, paired with the **$QQAI** token.
+**QQAI** — an Agent ID-gated token on BNB Chain with a fixed supply of 1 trillion. Holding a Binance Agent ID is the key to the sale: it unlocks the free mint and the paid mint.
 
-Holding a Binance Agent ID is the key: it unlocks the free mint, the paid mint, token claims and mining.
-
-- **Website:** https://getqqai.xyz
-- **Mint opens:** December 2, 2026, 08:00 (UTC+8)
+- **Website:** https://qqai-bnb.pages.dev
+- **X:** https://x.com/QQAgent_BNB
+- **Sale opens:** November 26, 2026, 18:00 (UTC+8)
 - **Chain:** BNB Smart Chain (BSC, chain id 56)
 
-## The NFT — QQ Agentic ID
+## The token
 
-| | |
-|---|---|
-| Total supply | 111,111 |
-| Tiers | Common 66,667 · Rare 27,778 · Epic 12,222 · Legendary 4,444 |
-| Tier weights | 1 / 2 / 3 / 4 |
-| Free mint | 1,111 slots, first-come-first-served, 1 per Agent ID (0.0001 BNB network fee) |
-| Paid mint | 110,000 at a flat **1.1 USDT** each, max 10 per wallet, plus unlimited referral tickets |
-| Market | Built-in non-custodial marketplace, 2.5% fee |
+- **1,000,000,000,000 QQAI, fixed supply.** Tokens are minted on demand by the sale contract — nothing is pre-minted to any wallet.
+- Allocation: **675B** public sale · **225B** liquidity reserve · **50B** team (locked in a vesting contract) · **50B** project reserve.
+- Trade tax applies only on the official pair; wallet-to-wallet transfers are untaxed. Buys pay **2%**. Sells start at **10%** when the pool opens and step down to **2%** permanently. All collected tax is converted to BNB and funds the project.
 
-Tier assignment is committed on-chain before the reveal (`sha256` commitment published in `QQAITierData`); the reveal happens when the token goes live.
+## The sale
 
-## The token — $QQAI
+### Free mint
 
-- Emission model with a hard cap of **111 trillion $QQAI**. Nothing is pre-minted; supply is created only by the claim, mining, liquidity and team contracts.
-- The token **goes live automatically when total mints reach 11,111**.
-- 100% of paid-mint proceeds stay in escrow inside `QQAINFT`. At every 11,111-mint milestone anyone can call `releaseEscrow()`: **80% funds liquidity, 15% buy back & burn, 5% team**.
-- **Safety net:** if the first milestone (11,111 mints) is not reached within 24 hours of opening, paid minters can burn their NFT for a 90% refund (0.99 USDT).
+- **555 slots × 16,500,000 QQAI**, first-come-first-served, max **2 per Agent ID**.
+- A 0.0001 BNB gate fee applies per free mint.
 
-### One claim per NFT — two doors
+### Paid mint — batches 1–4
 
-Every NFT carries one token allotment: **250,000,000 $QQAI × tier weight**, stepped down at each 11,111-mint milestone.
+- **1,111 mints per batch**, max **10 per Agent ID**. Every paid mint includes a **+5% Agent ID bonus** in QQAI.
 
-- **KEEP (35%)** — the NFT survives and keeps mining.
-- **COLLAPSE (100%)** — the NFT is burned; 90% pays out immediately and 10% flows into the Collapse Pool, shared pro-rata by tier weight among NFTs still alive when the claim period ends.
+| Batch | Price | QQAI per mint |
+|---|---|---|
+| 1 | 0.003 BNB | 50,000,000 |
+| 2 | 0.00315 BNB | 47,500,000 |
+| 3 | 0.0033075 BNB | 45,125,000 |
+| 4 | 0.003472875 BNB | 42,868,750 |
 
-Claim fees are charged in USDT, tiered by NFT tier; the first claim per wallet is free.
+### Escrow and the pool
 
-### Mining with a thermostat
+- Paid-mint BNB is escrowed on-chain. **80%** is reserved for the liquidity pool. The remaining 20% is split as **10% buy back & burn, 5% liquidity, 5% team**.
+- The moment paid mint **#4,444** lands, the sale contract itself creates the PancakeSwap pair, deposits the escrowed BNB together with the 225B QQAI liquidity reserve, and **burns 100% of the LP tokens**.
+- After the pool opens, paid minting continues as a buy-through with a bonus on top: **+5%** in batches 5–8, **+3%** in batches 9–12, **+1%** in batches 13–16, then the standard amount.
 
-Living NFTs mine **13,770 $QQAI × tier weight per day** from the moment the token goes live. A thermostat adjusts the rate against the recorded reference price (P0) of the official pool:
+### Refund safety net
 
-| Spot price vs P0 | Rate |
-|---|---|
-| ≥ 2× P0 | ×1.5 |
-| ≥ P0 | ×1.0 |
-| ≥ 0.5× P0 | ×0.5 |
-| < 0.5× P0 | ×0.25 |
-
-### Liquidity, on autopilot
-
-`QQAIPoolManager` is ownerless and has no withdraw function. At each milestone it pairs a fixed $QQAI tranche with the escrowed USDT on PancakeSwap V2 and **burns 100% of the LP tokens**. The first milestone also registers the official pair and records the reference price for the thermostat.
-
-Trades against the official pair carry a 2% buy / 2% sell tax; wallet-to-wallet transfers are untaxed.
+- If the pool has not opened within **7 days** of the sale start, paid minters can return all of their paid QQAI (it is burned) and receive **80% of their BNB back**; the remainder is split **15% to liquidity + 5% team**.
+- The refund window closes forever the moment the pool opens. Free mints are not refundable.
 
 ## Contracts
 
@@ -76,8 +64,6 @@ npm run compile
 ```
 
 Artifacts (ABI + bytecode + the Sourcify standard input) are written to `contracts/build/`.
-
-Deployment parameters live in `contracts/production-config.example.json` — placeholder addresses included; fill in your own before deploying.
 
 ## License
 
