@@ -56,15 +56,15 @@ Trades against the official pair carry a 2% buy / 2% sell tax; wallet-to-wallet 
 
 ## Contracts
 
-| Contract | Role |
-|---|---|
-| `QQAINFT` | The NFT sale: free + paid mint, escrow, milestone releases, refund safety net |
-| `QQAIToken` | $QQAI ERC-20: capped emission, minter lock, pair tax |
-| `QQAIClaim` | KEEP / COLLAPSE claims, Collapse Pool, mining accrual + thermostat |
-| `QQAIPoolManager` | Automatic liquidity provisioning, LP burn, reference price |
-| `QQAIMarket` | Non-custodial NFT marketplace (2.5% fee) |
-| `QQAITierData` | On-chain tier-assignment data chunks |
-| `External` | Interfaces: Agent ID registry, ERC-20, PancakeSwap V2 |
+Deployed on BNB Smart Chain (chain id 56). All four deployed contracts are verified on Sourcify with an **exact match**; the sources under `contracts/` are byte-for-byte the verified sources returned by Sourcify.
+
+| Contract | Address | Sourcify |
+|---|---|---|
+| `QQAIToken` | `0x69b8cA186337701262310079C14a715387338888` | [exact_match](https://sourcify.dev/#/lookup/0x69b8cA186337701262310079C14a715387338888) |
+| `QQAIMint` | `0x313eedfBb409A886F55203AEEb7270CF77B65DfF` | [exact_match](https://sourcify.dev/#/lookup/0x313eedfBb409A886F55203AEEb7270CF77B65DfF) |
+| `QQAIVesting` | `0xd46313C4A48902108743eD74B5C700909Dc7d35F` | [exact_match](https://sourcify.dev/#/lookup/0xd46313C4A48902108743eD74B5C700909Dc7d35F) |
+| `QQAIDeployer` | `0x8D60DB09a9F52E9b9B60fA2DD9B4303936B06C3c` | [exact_match](https://sourcify.dev/#/lookup/0x8D60DB09a9F52E9b9B60fA2DD9B4303936B06C3c) |
+| `External` | Interfaces: Agent ID registry, ERC-20, PancakeSwap V2 (compiled into the contracts above) | — |
 
 Solidity 0.8.28, via-IR, optimizer 200 runs, EVM Cancun. OpenZeppelin Contracts v5.
 
